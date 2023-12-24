@@ -1,0 +1,44 @@
+{
+  "name": "express-mesto-gha",
+  "main": "app.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teegroon-on/express-mesto-gha.git"
+  },
+  "keywords": [
+    "yandex-practicum",
+    "mesto",
+    "node-js",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "Sergey Kalashnikov",
+  "bugs": {
+    "url": "https://github.com/Teegroon-on/express-mesto-gha/issues"
+  },
+  "homepage": "https://github.com/Teegroon-on/express-mesto-gha#readme",
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "celebrate": "^15.0.1",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.5.1",
+    "express-winston": "^4.2.0",
+    "helmet": "^5.1.1",
+    "jsonwebtoken": "9.0.0",
+    "mongoose": "^6.4.6",
+    "validator": "^13.7.0",
+    "winston": "^3.8.1"
+  }
+}
