@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Teegroon-on/express-mesto-gha.git"
+    "url": "git+https://github.com/Teegroon-on/movies-explorer-api.git"
   },
   "keywords": [
     "yandex-practicum",
@@ -19,9 +19,9 @@
   ],
   "author": "Sergey Kalashnikov",
   "bugs": {
-    "url": "https://github.com/Teegroon-on/express-mesto-gha/issues"
+    "url": "https://github.com/Teegroon-on/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/Teegroon-on/express-mesto-gha#readme",
+  "homepage": "https://github.com/Teegroon-on/movies-explorer-api#readme",
   "devDependencies": {
     "eslint": "^8.20.0",
     "eslint-config-airbnb-base": "^15.0.0",
