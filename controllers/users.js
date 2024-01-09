@@ -5,6 +5,7 @@ const { User } = require('../models/user');
 const {
   ValidationError,
   UnauthorizedError,
+  ConflictError,
 } = require('../error-classes');
 
 const SALT_LENGTH = 10;
@@ -65,8 +66,38 @@ async function updateUser(req, res, next) {
   }
 }
 
+async function createUser(req, res, next) {
+  try {
+    const {
+      email, password, name, about, avatar,
+    } = req.body;
+    const passwordHash = await bcrypt.hash(password, SALT_LENGTH);
+    let user = await User.create({
+      email,
+      password: passwordHash,
+      name,
+      about,
+      avatar,
+    });
+    user = user.toObject();
+    delete user.password;
+    res.status(201).send(user);
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      next(new ValidationError(`Ошибка! Неверные данные в ${err.path ?? 'запросе'}`));
+      return;
+    }
+    if (err.code === 11000) {
+      next(new ConflictError('Ошибка! Пользователь с таким email уже существует'));
+      return;
+    }
+    next(err);
+  }
+}
+
 module.exports = {
   getCurrentUser,
   login,
   updateUser,
+  createUser,
 };

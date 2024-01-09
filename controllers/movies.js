@@ -63,7 +63,17 @@ async function deleteMovie(req, res, next) {
     });
 }
 
+async function getAllMovies(req, res, next) {
+  try {
+    const movies = await Movie.find({}).populate('owner');
+    res.send(movies);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   createMovie,
-  deleteMovie
+  deleteMovie,
+  getAllMovies
 };

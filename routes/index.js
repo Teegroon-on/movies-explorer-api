@@ -1,7 +1,7 @@
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 const { users } = require('./users');
-const { cards } = require('./movies');
+const { movies } = require('./movies');
 const { login, createUser } = require('../controllers/users');
 const { auth } = require('../middlewares/auth');
 const { NotFoundError } = require('../error-classes');
@@ -34,7 +34,7 @@ routes.post(
 );
 
 routes.use('/users', auth, users);
-routes.use('/cards', auth, cards);
+routes.use('/movies', auth, movies);
 
 routes.all('*', auth, (req, res, next) => {
   next(new NotFoundError('Неверный адрес запроса'));

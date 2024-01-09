@@ -2,7 +2,8 @@ const express = require('express');
 const {celebrate, Joi} = require('celebrate');
 const {
   createMovie,
-  deleteMovie
+  deleteMovie,
+  getAllMovies
 } = require('../controllers/movies');
 
 const paramsValidationConfig = {
@@ -32,9 +33,6 @@ movies.post(
       trailerLink: Joi.string()
         .required()
         .regex(/https?:\/\/(www)?[0-9a-z\-._~:/?#[\]@!$&'()*+,;=]+#?$/i),
-      thumbnail: Joi.string()
-        .required()
-        .regex(/https?:\/\/(www)?[0-9a-z\-._~:/?#[\]@!$&'()*+,;=]+#?$/i),
       owner: Joi.string().length(24).hex().required(),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
@@ -45,5 +43,7 @@ movies.post(
 );
 
 movies.delete('/:_id', celebrate(paramsValidationConfig), deleteMovie);
+
+movies.get('/', getAllMovies);
 
 module.exports = {cards: movies};

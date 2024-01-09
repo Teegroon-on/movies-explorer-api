@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const { NODE_ENV, DB_LINK } = process.env;
 const helmet = require('helmet');
 const cors = require('cors')
 const rateLimit = require('express-rate-limit');
@@ -10,7 +11,7 @@ const { handleError } = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
-const DATABASE_URL = 'mongodb://127.0.0.1:27017//bitfilmsdb';
+const DATABASE_URL =  NODE_ENV === 'production' ? DB_LINK : 'mongodb://127.0.0.1:27017//bitfilmsdb';
 
 const app = express();
 

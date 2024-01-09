@@ -1,5 +1,5 @@
 {
-  "name": "express-mesto-gha",
+  "name": "movies-explorer-api",
   "main": "app.js",
   "scripts": {
     "lint": "npx eslint .",
