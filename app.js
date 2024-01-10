@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const { NODE_ENV, DB_LINK } = process.env;
 const helmet = require('helmet');
-const cors = require('cors')
 const rateLimit = require('express-rate-limit');
 
 const { routes } = require('./routes');
@@ -29,8 +28,6 @@ mongoose
     console.log('Error on database connection');
     console.error(err);
   });
-
-app.use(cors());
 
 app.use(requestLogger);
 
