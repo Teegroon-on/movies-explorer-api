@@ -46,4 +46,4 @@ movies.delete('/:_id', celebrate(paramsValidationConfig), deleteMovie);
 
 movies.get('/', getAllMovies);
 
-module.exports = {cards: movies};
+module.exports = {movies};
