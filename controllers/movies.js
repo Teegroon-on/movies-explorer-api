@@ -47,7 +47,7 @@ async function createMovie(req, res, next) {
 
 async function deleteMovie(req, res, next) {
   const {movieId} = req.params;
-  return Movie.findById(movieId).populate('owner').populate('likes')
+  return Movie.findById(movieId).populate('owner')
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Ошибка! Такой фильм не найден');
