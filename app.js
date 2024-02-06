@@ -16,11 +16,18 @@ const limiter = require('./utils/limiter');
 const { DATA_BASE, NODE_ENV } = process.env;
 
 const { PORT = 3000 } = process.env;
+const DATABASE_URL = NODE_ENV === 'production' ? DATA_BASE : 'mongodb://127.0.0.1:27017/bitfilmsdb';
 const app = express();
-mongoose.connect(NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27017/bitfilmsdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
+mongoose
+  .connect(DATABASE_URL)
+  .then(() => {
+    console.log(`Connected to database on ${DATABASE_URL}`);
+  })
+  .catch((err) => {
+    console.log('Error on database connection');
+    console.error(err);
+  });
 
 app.use(cors());
 
