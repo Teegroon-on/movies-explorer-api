@@ -7,7 +7,7 @@ const movieValidator = celebrate({
     director: Joi.string().required(),
     duration: Joi.number().required(),
     description: Joi.string().required(),
-    year: Joi.date().required(), // нужно уточнить
+    year: Joi.date().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     image: Joi.string().required().pattern(urlPattern),
@@ -19,7 +19,7 @@ const movieValidator = celebrate({
 
 const movieIdValidator = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().hex().length(24),
+    movieId: Joi.string().required().hex().length(24),
   }),
 });
 
