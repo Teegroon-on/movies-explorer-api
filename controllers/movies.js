@@ -1,6 +1,6 @@
-const BadRequestError = require('../errors/badRequest');
-const NotFoundError = require('../errors/notFound');
-const ForbiddenError = require('../errors/forbidden');
+const BadRequestError = require('../httpStatus/badRequest');
+const NotFoundError = require('../httpStatus/notFound');
+const ForbiddenError = require('../httpStatus/forbidden');
 const {
   BAD_REQUEST_TEXT,
   NOT_FOUND_TEXT,
