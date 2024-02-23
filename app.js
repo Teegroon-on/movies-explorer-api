@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
+const corsHandler = require('./midlewares/corsHandler');
 const { errorHandler } = require('./midlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./midlewares/logger');
 const router = require('./routes/index');
@@ -25,14 +26,14 @@ mongoose
     console.log('Error on database connection');
     console.error(err);
   });
-
+app.use(limiter);
+app.use(helmet());
+app.use(corsHandler);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(helmet());
 
 app.use(requestLogger);
-app.use(limiter);
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
