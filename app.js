@@ -2,12 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const bodyParser = require('body-parser');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const cors = require('cors');
 const { errorHandler } = require('./midlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./midlewares/logger');
 const router = require('./routes/index');
@@ -29,10 +26,8 @@ mongoose
     console.error(err);
   });
 
-app.use(cors());
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
 
