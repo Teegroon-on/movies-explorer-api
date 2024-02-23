@@ -108,17 +108,27 @@ module.exports.login = (req, res, next) => {
   return User.findOne({ email })
     .select('+password')
     .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET_DEV,
-        { expiresIn: '7d' },
-      );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: true,
-      })
-        .send({ message: LOGIN_MESSAGE });
+      if (!user) {
+        throw new UnauthorizedError(UNAUTHORIZED_TEXT);
+      }
+      bcrypt.compare(password, user.password, (err, isValidPassword) => {
+        if (!isValidPassword) {
+          return next(new UnauthorizedError(UNAUTHORIZED_TEXT));
+        }
+        const token = jwt.sign(
+          { _id: user._id },
+          NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+          {
+            expiresIn: '7d',
+          },
+        );
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: true,
+        });
+        return res.status(OK_CODE).send({message: OK_CODE});
+      });
     })
     .catch(next);
 };
