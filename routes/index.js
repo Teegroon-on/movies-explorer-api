@@ -13,7 +13,7 @@ const NotFoundError = require('../httpStatus/notFound');
 router.post('/signup', userValidator, createUser);
 router.post('/signin', userLoginValidator, login);
 router.use(auth);
-router.get('/signout', auth, logout);
+router.get('/signout', logout);
 router.use('/users', userRouter);
 router.use('/movies', movieRouter);
 
