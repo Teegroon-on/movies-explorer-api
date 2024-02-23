@@ -7,7 +7,7 @@ const { JWT_SECRET, NODE_ENV } = process.env;
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
   if (!token) {
-    throw new UnauthorizedError(UNAUTHORIZED_TEXT);
+    throw new UnauthorizedError("kek");
   }
 
   let payload;
